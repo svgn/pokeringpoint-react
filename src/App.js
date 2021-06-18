@@ -37,29 +37,33 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Actions />
-            </Route>
-            <Route path="/create">
-              <Create />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/room/:roomId">
-              <Home user={user} />
-            </Route>
-            <Route path="/">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </Router>
-      </ThemeProvider>
-    </div>
+    <>
+      <img className="appImage" src={'/questions.jpg'} alt="background"></img>
+      <div className="App">
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Actions />
+              </Route>
+              <Route path="/create">
+                <Create />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/room/:roomId">
+                <Home user={user} />
+              </Route>
+              <Route path="/">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </div>
+    </>
+    
   );
 }
 

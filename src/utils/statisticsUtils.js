@@ -23,3 +23,21 @@ export const getTheModes = (votes) => {
     const [, modeCount] = modes[0];
     return modes.filter(([vote, count]) => count === modeCount);
 }
+
+export const getSuggestedMode = (votes) => {
+    if (votes.length === 0) {
+        return 0;
+    }
+
+    const average = getAverage(votes);
+    console.log(average);
+    return votes.reduce((prev, curr) => Math.abs(curr - average < Math.abs(prev - average) ? curr : prev));
+}
+
+const getAverage = (votes) => {
+    if (votes.length === 0) {
+        return 0;
+    }
+
+    return votes.reduce((acc, vote) => acc + vote, 0) / votes.length;
+}

@@ -8,7 +8,7 @@ import ConnectionHub from '../rest/connectionHub.js';
 import Cards from "./cards/Cards";
 import PokerTable from './poker-table/PokerTable';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import { getTheModes } from '../utils/statisticsUtils'
+import { groupVotes, getSuggestedMode } from '../utils/statisticsUtils'
 
 const initialState = {
     name: 'No name',
@@ -19,7 +19,12 @@ const initialState = {
 
 const calculateModes = (state) => {
     const votes = state.userList?.map(user => user.vote);
-    return getTheModes(votes);
+    return groupVotes(votes);
+}
+
+const calculateSuggestedMode = (state) => {
+    const votes = state.userList?.map(user => user.vote);
+    return getSuggestedMode(votes);
 }
 
 function reducer(state = {}, action = {}) {
@@ -50,6 +55,7 @@ export function Home() {
     const params = useParams();
     const roomId = parseInt(params.roomId);
     let modes = calculateModes(state);
+    let suggestedMode = calculateSuggestedMode(state);
 
     useEffect(() => {
         ConnectionHub.subscribeForUpdateLobby(roomId, (lobby) => {
@@ -122,6 +128,7 @@ export function Home() {
                             onShowVotesClick={onShowVotesClick}
                             onClearVotesClick={onClearVotesClick}
                             modes={modes}
+                            suggestedMode={suggestedMode}
                         />
                     }
                     {user.userType === 1 &&

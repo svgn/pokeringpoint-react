@@ -17,7 +17,7 @@ const classes = {
 function Actions() {
     const history = useHistory();
     const user = localStorageService.getLoggedUser();
-        useEffect(() => {
+    useEffect(() => {
         ConnectionHub.subscribeForJoinLobby((user) => {
           localStorageService.setLoggedUser(user);
           const { lobbyId } = user;
@@ -40,7 +40,7 @@ function Actions() {
                     container
                     spacing={10}
                     justify="center"
-                    lignItems="center"
+                    alignItems="center"
                     alignContent="center"
                     style={{ minHeight: "25vh" }}>
                     <Grid key={0} item>

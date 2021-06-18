@@ -9,7 +9,7 @@ function PokerPlayer({ player, showVote }) {
     return (
         <div className="poker-player__container">
             <div className={avatarClassName}>
-                {showVote ? player.vote : '?'}
+                {showVote ? player.vote : ''}
             </div>
             <div className="poker-player__name">{player.name}</div>
         </div>
