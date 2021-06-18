@@ -3,8 +3,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
 import Actions from "./actions/Actions";
 import { Home } from "./home/home.jsx";
@@ -55,15 +54,12 @@ function App() {
               <Route path="/room/:roomId">
                 <Home user={user} />
               </Route>
-              <Route path="/">
-                <Redirect to="/" />
-              </Route>
             </Switch>
           </Router>
         </ThemeProvider>
       </div>
     </>
-    
+
   );
 }
 
