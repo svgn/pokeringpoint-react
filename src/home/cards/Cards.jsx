@@ -54,7 +54,7 @@ function Cards({ items, onSelection, selectedCard, disable }) {
             item
             spacing={3}
             justify="center"
-            lignItems="center"
+            alignItems="center"
             alignContent="center">
             {items.map((card) => {
                 const disableClass = disable ? classes.disableCard : '';
