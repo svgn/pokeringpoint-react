@@ -63,7 +63,7 @@ export function Home() {
         HttpRequest.getRoom({ id: roomId }).then((lobby) => {
             const mappedLobby = { ...lobby, userList: lobby.users || [] };
             dispatch({ type: 'update', payload: mappedLobby });
-    
+
             if (user) {
                 const match = lobby?.users.find(u => u.connectionId === user.connectionId);
                 if (!match) {
@@ -104,7 +104,7 @@ export function Home() {
 
     return (
         <>
-            { !user ? <Redirect to='/login' /> :
+            { !user ? <Redirect to='/' /> :
                 <div className="home-main">
                     <header className="home__header">
                         <h2>{state.name}</h2>

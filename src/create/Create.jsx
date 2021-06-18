@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import {Grid, TextField, Button, FormHelperText} from '@material-ui/core';
+import HttpRequest from "../rest/httpRequest";
+import {useHistory} from "react-router-dom";
 
-function CreateRoom({ onCreateClick, onCancelClick }) {
+function Create() {
     const [roomName, setRoomName] = useState('');
     const [roomNameError, setRoomNameError] = useState(false);
-    const createClick = () => {
+    const history = useHistory();
+    const createClick = async () => {
         if (roomName === '') {
             setRoomNameError(true);
             return;
         }
-        onCreateClick(roomName);
+        const response = await HttpRequest.createRoom({ roomName });
+        const room = await response.json();
+        history.push(`/login/${room.id}`);
     };
     const onRoomNameChange = (e) => {
         if (roomNameError) {
             setRoomNameError(false);
         }
         setRoomName(e.target.value);
+    }
+    const onCancelClick = () => {
+        history.push(`/`);
     }
 
     return (
@@ -57,4 +65,4 @@ function CreateRoom({ onCreateClick, onCancelClick }) {
     )
 }
 
-export default CreateRoom;
+export default Create;
