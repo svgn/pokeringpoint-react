@@ -58,24 +58,31 @@ export function Home() {
     let suggestedMode = calculateSuggestedMode(state);
 
     useEffect(() => {
+        let wasCanceled = false;
         ConnectionHub.subscribeForUpdateLobby(roomId, (lobby) => {
-            const mappedLobby = { ...lobby, userList: lobby.users || [] };
-            dispatch({ type: 'update', payload: mappedLobby });
+            if (!wasCanceled) {
+                const mappedLobby = { ...lobby, userList: lobby.users || [] };
+                dispatch({ type: 'update', payload: mappedLobby });
+            }
         })
 
         HttpRequest.getRoom({ id: roomId }).then((lobby) => {
-            const mappedLobby = { ...lobby, userList: lobby.users || [] };
-            dispatch({ type: 'update', payload: mappedLobby });
+            if (!wasCanceled) {
+                const mappedLobby = { ...lobby, userList: lobby.users || [] };
+                dispatch({ type: 'update', payload: mappedLobby });
 
-            if (user) {
-                const match = lobby?.users.find(u => u.connectionId === user.connectionId);
-                if (!match) {
-                    ConnectionHub.joinLobby(roomId, user.name, user.userType);
+                if (user) {
+                    const match = lobby?.users.find(u => u.connectionId === user.connectionId);
+                    if (!match) {
+                        ConnectionHub.joinLobby(roomId, user.name, user.userType);
+                    }
                 }
             }
         }).catch(() => {
             clearUser();
         });
+
+        return () => { wasCanceled = true; };
     }, [roomId, user]);
 
     

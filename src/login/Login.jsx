@@ -42,14 +42,15 @@ function Login() {
         setUsername(e.target.value)
     }
 
-    const setRoom = async () => {
-        const response = await HttpRequest.getRooms();
-        response.unshift({ id: '', value: ''})
-        setRooms(response || []);
-    }
-
     useEffect(() => {
-        setRoom();
+        let wasCanceled = false;
+        HttpRequest.getRooms().then(response => {
+            if (!wasCanceled) {
+                response.unshift({ id: '', value: ''})
+                setRooms(response || []);
+            }
+        });
+        return () => { wasCanceled = true; }
     }, []);
 
 
