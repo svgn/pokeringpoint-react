@@ -1,20 +1,24 @@
 import React from 'react';
 
 function PokerPlayer({ player, showVote }) {
-    let avatarClassName = 'poker-player__avatar';
-    if (player.vote) {
-        avatarClassName += ' poker-player__avatar--voted';
+    let avatarClass = 'poker-player__avatar';
+    if (!showVote && player.vote) {
+        avatarClass += ' poker-player__avatar--voted';
     }
     if (showVote && player.vote) {
-        avatarClassName += ' poker-player__avatar--vote-visible';
+        avatarClass += ' flipper';
     }
+
+    let avatarFrontClassName = 'poker-player__avatar--front';
+    let avatarBackClassName = 'poker-player__avatar--back poker-player__avatar--vote-visible';
 
     return (
         <div className="poker-player__container">
-            <div className={avatarClassName}>
-                { showVote ? player.vote : '' }
+            <div className={avatarClass}>
+                <div className={avatarFrontClassName}></div>
+                <div className={avatarBackClassName}>{ player.vote }</div>
             </div>
-            <div className="poker-player__name">{player.name}</div>
+            <div className="poker-player__name">{ player.name }</div>
         </div>
     )
 }
