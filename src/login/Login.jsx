@@ -58,7 +58,7 @@ function Login() {
             container
             spacing={3}
             justify="center"
-            lignItems="center"
+            alignItems="center"
             alignContent="center"
             direction="column"
             style={{ minHeight: "25vh" }}>
@@ -84,7 +84,9 @@ function Login() {
                     error={usernameError}
                     value={username}
                     onChange={onUsernameChange}
-                    placeholder="Username" />
+                    placeholder="Username"
+                    inputProps={{ maxLength: 16 }}
+                    />
                 <FormHelperText error={usernameError}>Enter username.</FormHelperText>
             </Grid>
             <Grid key={2} item>

@@ -31,7 +31,7 @@ function Create() {
             container
             spacing={3}
             justify="center"
-            lignItems="center"
+            alignItems="center"
             alignContent="center"
             direction="column"
             style={{ minHeight: "25vh" }}>
