@@ -1,17 +1,23 @@
-
 .poker-player__container {
     width: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 10px;
-    border: 1px solid red;
 }
 
 .poker-player__avatar {
     height: 70px;
     width: 50px;
-    border: 1px solid blue;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.poker-player__avatar--voted {
+    background-color: var(--primary-color);
 }
 
 .poker-player__name {

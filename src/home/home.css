@@ -1,0 +1,19 @@
+@import './poker-table/poker-table.css';
+
+.home__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+
+.home__header-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.home__header-button div {
+    font-size: 12px;
+}
