@@ -114,6 +114,7 @@ export function Home() {
     }
 
     const showVotes = state.showVotes || state.userList.reduce((acc,user) => (acc && user.vote), true);
+    const currentUser = state.userList.find(player => player.connectionId === user.connectionId) || {};
 
     return (
         <>
@@ -145,7 +146,7 @@ export function Home() {
                             <Cards
                                 items={state.cards}
                                 onSelection={onVoteClick}
-                                selectedCard={user.vote}
+                                selectedCard={currentUser.vote}
                                 disable={state.showVotes}
                             />
                         </div>
