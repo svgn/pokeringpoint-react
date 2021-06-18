@@ -6,9 +6,6 @@ const useStyles = makeStyles(() => ({
     root: {
         flexGrow: 1,
         minHeight: 120,
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
         margin: 0,
         width: '100%'
     },

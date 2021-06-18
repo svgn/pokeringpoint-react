@@ -115,12 +115,13 @@ export function Home() {
                     <header className="home__header">
                         <h2>{state.name}</h2>
                         <div className="home__header-button" onClick={onLeaveRoomClick}>
-                            <MeetingRoomIcon fontSize="large"></MeetingRoomIcon>
+                            <MeetingRoomIcon fontSize="large"/>
                             <div>Leave Room</div>
                         </div>
                     </header>
                     <hr/>
-                    {state.userList &&
+                    <div className="home__table">
+                        {state.userList &&
                         <PokerTable
                             players={state.userList}
                             showVotes={showVotes}
@@ -130,14 +131,17 @@ export function Home() {
                             modes={modes}
                             suggestedMode={suggestedMode}
                         />
-                    }
+                        }
+                    </div>
                     {user.userType === 1 &&
-                        <Cards
-                            items={state.cards}
-                            onSelection={onVoteClick}
-                            selectedCard={user.vote}
-                            disable={state.showVotes}
-                        />
+                        <div className="home__voting-footer">
+                            <Cards
+                                items={state.cards}
+                                onSelection={onVoteClick}
+                                selectedCard={user.vote}
+                                disable={state.showVotes}
+                            />
+                        </div>
                     }
                 </div>
             }
