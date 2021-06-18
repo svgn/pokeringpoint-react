@@ -2,11 +2,19 @@ import React, { useEffect } from 'react';
 import { localStorageService } from '../storage/local-storage.service';
 import { Redirect, useHistory } from 'react-router-dom';
 import ConnectionHub from "../rest/connectionHub";
-import {Button, Grid} from "@material-ui/core";
+import { Button, Grid, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+    button: {
+        background: 'var(--light-gray-blue)',
+    }
+}));
 
 function Actions() {
     const history = useHistory();
+    const classes = useStyles();
     const user = localStorageService.getLoggedUser();
+
     useEffect(() => {
         ConnectionHub.subscribeForJoinLobby((user) => {
           localStorageService.setLoggedUser(user);
@@ -14,9 +22,11 @@ function Actions() {
           history.push(`/room/${lobbyId}`);
         });
     }, [history]);
+    
     const redirectToCreatePare = () => {
         history.push("/create");
     };
+    
     const redirectToLogin = () => {
         history.push("/login");
     };
@@ -34,12 +44,12 @@ function Actions() {
                     alignContent="center"
                     style={{ minHeight: "25vh" }}>
                     <Grid key={0} item>
-                        <Button variant="contained" color="primary" size="large" onClick={redirectToCreatePare}>
+                        <Button className={classes.button} variant="contained" color="primary" size="large" onClick={redirectToCreatePare}>
                             Create Room
                         </Button>
                     </Grid>
                     <Grid key={1} item>
-                        <Button variant="contained" color="primary" size="large" onClick={redirectToLogin}>
+                        <Button className={classes.button} variant="contained" color="primary" size="large" onClick={redirectToLogin}>
                             Join Room
                         </Button>
                     </Grid>

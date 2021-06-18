@@ -3,6 +3,13 @@ import { Grid, TextField, FormControl, InputLabel, Select, Button, FormControlLa
 import HttpRequest from '../rest/httpRequest';
 import ConnectionHub from "../rest/connectionHub";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+    button: {
+        background: 'var(--light-gray-blue)',
+    }
+}));
 
 function Login() {
     const [roomId, setRoomId] = useState('');
@@ -12,6 +19,7 @@ function Login() {
     const [isObserver, setIsObserver] = useState();
     const [rooms, setRooms] = useState([]);
     const history = useHistory();
+    const classes = useStyles();
 
     const selectRoom = async () => {
         if (roomId === '') {
@@ -26,15 +34,18 @@ function Login() {
             ConnectionHub.joinLobby(room.id, username, userType);
         }
     }
+
     const cancelRoom = () => {
         history.push(`/`);
     }
+
     const onRoomIdChange = (e) => {
         if (roomError) {
             setRoomError(false);
         }
         setRoomId(e.target.value);
     }
+
     const onUsernameChange = (e) => {
         if (usernameError) {
             setUsernameError(false);
@@ -98,12 +109,12 @@ function Login() {
                         spacing={3}
                         direction="row">
                         <Grid key={0} item>
-                            <Button variant="contained" color="primary" size="large" onClick={cancelRoom}>
+                            <Button className={classes.button} variant="contained" color="primary" size="large" onClick={cancelRoom}>
                                 Cancel
                             </Button>
                         </Grid>
                         <Grid key={1} item>
-                            <Button variant="contained" color="primary" size="large" onClick={selectRoom}>
+                            <Button className={classes.button} variant="contained" color="primary" size="large" onClick={selectRoom}>
                                 Join
                             </Button>
                         </Grid>

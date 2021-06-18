@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import {Grid, TextField, Button, FormHelperText} from '@material-ui/core';
 import HttpRequest from "../rest/httpRequest";
-import {useHistory} from "react-router-dom";
+import { Grid, TextField, Button, FormHelperText, makeStyles } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
+
+const useStyles = makeStyles(() => ({
+    button: {
+        background: 'var(--light-gray-blue)',
+    }
+}));
 
 function Create() {
     const [roomName, setRoomName] = useState('');
     const [roomNameError, setRoomNameError] = useState(false);
     const history = useHistory();
+    const classes = useStyles();
+
     const createClick = async () => {
         if (roomName === '') {
             setRoomNameError(true);
@@ -16,12 +24,14 @@ function Create() {
         const room = await response.json();
         history.push(`/login/${room.id}`);
     };
+
     const onRoomNameChange = (e) => {
         if (roomNameError) {
             setRoomNameError(false);
         }
         setRoomName(e.target.value);
     }
+
     const onCancelClick = () => {
         history.push(`/`);
     }
@@ -49,12 +59,12 @@ function Create() {
                         spacing={3}
                         direction="row">
                         <Grid key={0} item>
-                            <Button variant="contained" color="primary" size="large" onClick={onCancelClick}>
+                            <Button className={classes.button} variant="contained" color="primary" size="large" onClick={onCancelClick}>
                                 Cancel
                             </Button>
                         </Grid>
                         <Grid key={1} item>
-                            <Button variant="contained" color="primary" size="large" onClick={createClick}>
+                            <Button className={classes.button} variant="contained" color="primary" size="large" onClick={createClick}>
                                 Create
                             </Button>
                         </Grid>

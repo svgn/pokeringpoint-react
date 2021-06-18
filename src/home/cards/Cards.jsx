@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     paper: {
         height: 70,
         width: 50,
-        background: blue[100],
+        background: 'var(--light-gray-blue)',
         cursor: 'pointer',
         fontSize: '1.2rem',
         color: 'white',
@@ -20,9 +20,10 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'space-around',
         flexWrap: 'nowrap',
+        opacity: '0.7',
 
         "&:active, &:hover": {
-            backgroundColor: blue[300],
+            opacity: 1,
             marginTop: '-.25rem'
         }
     },

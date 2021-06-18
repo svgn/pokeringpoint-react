@@ -1,9 +1,5 @@
+@import './Variables.css';
 @import './home/Home.css';
-
-:root {
-    --primary-color: #030990;
-    --secondary-color: #A1A4FF;
-}
 
 .App {
     max-width: 80%;

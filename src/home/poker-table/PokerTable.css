@@ -100,14 +100,14 @@
 
 .mode__value {
     background-color: white;
-    border: 1px solid #568EB6;
+    border: 1px solid var(--light-gray-blue);
     height: 35px;
     width: 25px;
     line-height: 30px;
     vertical-align: middle;
     text-align: center;
     border-radius: 5px;
-    color: #568EB6;
+    color: var(--light-gray-blue);
 }
 
 .mode__count {

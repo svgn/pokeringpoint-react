@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 15px;
 }
 
 .poker-player__avatar {
@@ -52,9 +52,9 @@
 }
 
 .poker-player__avatar--vote-visible {
-    background: none;
-    border: 2px solid #568EB6;
-    color: #568EB6;
+    background: white;
+    border: 2px solid var(--light-gray-blue);
+    color: var(--light-gray-blue);
 }
 
 .poker-player__name {
