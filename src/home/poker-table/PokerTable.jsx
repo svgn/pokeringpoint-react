@@ -1,7 +1,7 @@
 import React from 'react';
-import PokerPlayer from './player/PokerPlayer';
+import PokerPlayer from '../poker-player/PokerPlayer';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 
 function PokerTable({ players, showVotes, user, modes, suggestedMode, onShowVotesClick, onClearVotesClick }) {
     const createPlayerDistribution = () => {
@@ -46,8 +46,8 @@ function PokerTable({ players, showVotes, user, modes, suggestedMode, onShowVote
                         <div className="table-middle__button-wrapper">
                             {showVotes && (
                                 <div className="table-middle__button" onClick={onClearVotesClick}>
-                                    <DeleteSweepIcon fontSize="large"></DeleteSweepIcon>
-                                    <div>Clear Votes</div>
+                                    <PlayCircleOutline fontSize="large"></PlayCircleOutline>
+                                    <div>Start new vote</div>
                                 </div>)
                             }
                             {hasVotes && !showVotes && (

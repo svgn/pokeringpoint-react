@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { localStorageService } from '../storage/local-storage.service';
 import { Redirect } from 'react-router-dom';
+import { groupVotes, getSuggestedMode } from '../utils/statistics.utils.js'
 import HttpRequest from '../rest/httpRequest';
 import ConnectionHub from '../rest/connectionHub.js';
 import Cards from "./cards/Cards";
 import PokerTable from './poker-table/PokerTable';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import { groupVotes, getSuggestedMode } from '../utils/statisticsUtils'
 
 const initialState = {
     name: 'No name',

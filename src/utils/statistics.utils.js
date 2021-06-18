@@ -1,3 +1,5 @@
+import { VotesConst } from '../constants/votes.const';
+
 export const groupVotes = (votes) => {
     const buckets = new Map();
     votes = votes.filter(vote => vote !== null);
@@ -31,8 +33,10 @@ export const getSuggestedMode = (votes) => {
     }
 
     const average = getAverage(votes);
-    console.log(average);
-    return votes.reduce((prev, curr) => Math.abs(curr - average < Math.abs(prev - average) ? curr : prev));
+    let possibleVoteValues = VotesConst.map(v => v.value);
+    possibleVoteValues = possibleVoteValues.filter(v => v !== null);
+
+    return possibleVoteValues.reduce((prev, curr) => Math.abs(curr - average < Math.abs(prev - average) ? curr : prev));
 }
 
 const getAverage = (votes) => {

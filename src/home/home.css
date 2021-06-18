@@ -1,4 +1,5 @@
-@import './poker-table/poker-table.css';
+@import './poker-table/PokerTable.css';
+@import './poker-player/PokerPlayer.css';
 
 .home-main {
     display: flex;

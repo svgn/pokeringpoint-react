@@ -6,7 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import Actions from "./actions/Actions";
-import { Home } from "./home/home.jsx";
+import { Home } from "./home/Home.jsx";
 import { ThemeProvider } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { localStorageService } from "./storage/local-storage.service";
