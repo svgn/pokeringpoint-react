@@ -10,18 +10,32 @@
 .poker-player__avatar {
     height: 70px;
     width: 50px;
+    line-height: 60px;
+    vertical-align: middle;
     background-color: #d6d6d6;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 40px;
     text-align: center;
     color: white;
+    background: linear-gradient(
+        45deg
+        ,#568BAF 12%,transparent 0,transparent 88%,#568BAF 0),linear-gradient(
+        135deg
+        ,transparent 37%,#568EB6 0,#568EB6 63%,transparent 0),linear-gradient(
+        45deg
+        ,transparent 37%,#568BAF 0,#568BAF 63%,transparent 0),#74b3ff;
+    background-size: 17px 17px;
 }
 
 .poker-player__avatar--voted {
-    background-color: var(--primary-color);
+    background: none;
+    border: 2px solid #568EB6;
+    color: #568EB6;
 }
 
 .poker-player__name {
     font-size: 13px;
     text-align: center;
+    color: #2c5068;
+    font-weight: 600;
 }

@@ -103,6 +103,7 @@
 }
 
 .mode__value {
+    background-color: white;
     border: 1px solid white;
     height: 35px;
     width: 25px;
