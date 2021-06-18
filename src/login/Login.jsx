@@ -43,14 +43,10 @@ function Login() {
     }
 
     useEffect(() => {
-        let wasCanceled = false;
         HttpRequest.getRooms().then(response => {
-            if (!wasCanceled) {
-                response.unshift({ id: '', value: ''})
-                setRooms(response || []);
-            }
+            response.unshift({ id: '', value: '' })
+            setRooms(response || []);
         });
-        return () => { wasCanceled = true; }
     }, []);
 
 
