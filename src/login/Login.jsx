@@ -42,77 +42,79 @@ function Login() {
         setUsername(e.target.value)
     }
 
-    const setRoom = async () => {
-        const response = await HttpRequest.getRooms();
-        response.unshift({ id: '', value: ''})
-        setRooms(response || []);
-    }
-
     useEffect(() => {
-        setRoom();
+        let wasCanceled = false;
+        HttpRequest.getRooms().then(response => {
+            if (!wasCanceled) {
+                response.unshift({ id: '', value: ''})
+                setRooms(response || []);
+            }
+        });
+        return () => { wasCanceled = true; }
     }, []);
 
 
     return (
-        <Grid
-            container
-            spacing={3}
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-            direction="column"
-            style={{ minHeight: "25vh" }}>
-            <Grid key={0} item>
-                <FormControl size="medium" style={{ minWidth: 195 }}>
-                    <InputLabel value={roomId}>Room</InputLabel>
-                    <Select
-                        native
-                        error={roomError}
-                        autoWidth={false}
-                        value={roomId}
-                        onChange={onRoomIdChange}
-                    >
-                        {rooms.map(room => {
-                            return <option key={room.id} value={room.id}>{room.name}</option>
-                        })}
-                    </Select>
-                    <FormHelperText error={roomError}>Select room.</FormHelperText>
-                </FormControl>
-            </Grid>
-            <Grid key={1} item>
-                <TextField
-                    error={usernameError}
-                    value={username}
-                    onChange={onUsernameChange}
-                    placeholder="Username"
-                    inputProps={{ maxLength: 16 }}
+        <div className="center-page-view">
+            <Grid
+                container
+                spacing={3}
+                justify="center"
+                alignItems="center"
+                alignContent="center"
+                direction="column">
+                <Grid key={0} item>
+                    <FormControl size="medium" style={{ minWidth: 195 }}>
+                        <InputLabel value={roomId}>Room</InputLabel>
+                        <Select
+                            native
+                            error={roomError}
+                            autoWidth={false}
+                            value={roomId}
+                            onChange={onRoomIdChange}
+                        >
+                            {rooms.map(room => {
+                                return <option key={room.id} value={room.id}>{room.name}</option>
+                            })}
+                        </Select>
+                        <FormHelperText error={roomError}>Select room.</FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid key={1} item>
+                    <TextField
+                        error={usernameError}
+                        value={username}
+                        onChange={onUsernameChange}
+                        placeholder="Username"
+                        inputProps={{ maxLength: 16 }}
+                        />
+                    <FormHelperText error={usernameError}>Enter username.</FormHelperText>
+                </Grid>
+                <Grid key={2} item>
+                    <FormControlLabel
+                        control={<Checkbox checked={isObserver} color="primary" onChange={()=>setIsObserver(!isObserver)} />}
+                        label="Join as observer"
                     />
-                <FormHelperText error={usernameError}>Enter username.</FormHelperText>
-            </Grid>
-            <Grid key={2} item>
-                <FormControlLabel
-                    control={<Checkbox checked={isObserver} color="primary" onChange={()=>setIsObserver(!isObserver)} />}
-                    label="Join as observer"
-                />
-            </Grid>
-            <Grid key={3} item>
-                <Grid
-                    container
-                    spacing={3}
-                    direction="row">
-                    <Grid key={0} item>
-                        <Button variant="contained" color="primary" size="large" onClick={cancelRoom}>
-                            Cancel
-                        </Button>
-                    </Grid>
-                    <Grid key={1} item>
-                        <Button variant="contained" color="primary" size="large" onClick={selectRoom}>
-                            Join
-                        </Button>
+                </Grid>
+                <Grid key={3} item>
+                    <Grid
+                        container
+                        spacing={3}
+                        direction="row">
+                        <Grid key={0} item>
+                            <Button variant="contained" color="primary" size="large" onClick={cancelRoom}>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid key={1} item>
+                            <Button variant="contained" color="primary" size="large" onClick={selectRoom}>
+                                Join
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+        </div>
     )
 }
 

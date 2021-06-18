@@ -29,19 +29,13 @@ const useStyles = makeStyles(() => ({
     selectedCard: {
         backgroundColor: blue[300],
         marginTop: '-.25rem'
-    },
-    disableCard: {
-        background: 'gray',
-        pointerEvents: 'none'
     }
 }));
 
-function Cards({ items, onSelection, selectedCard, disable }) {
+function Cards({ items, onSelection, selectedCard }) {
     const classes = useStyles();
     const onSelect = (card) => {
-        if (!disable) {
-            onSelection(card);
-        }
+        onSelection(card);
     }
 
     return (
@@ -54,12 +48,11 @@ function Cards({ items, onSelection, selectedCard, disable }) {
             alignItems="center"
             alignContent="center">
             {items.map((card) => {
-                const disableClass = disable ? classes.disableCard : '';
-                const selectedClass = selectedCard ? classes.selectedCard : '';
+                const selectedClass = selectedCard === card ? classes.selectedCard : '';
                 return (
                     <Grid key={card} item onClick={() => onSelect(card)}>
                         <Paper
-                            className={`${classes.paper} ${selectedClass} ${disableClass}`}>
+                            className={`${classes.paper} ${selectedClass}`}>
                             <Typography variant="h5" component="h3">
                                 {card}
                             </Typography>

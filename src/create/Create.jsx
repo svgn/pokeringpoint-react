@@ -27,41 +27,42 @@ function Create() {
     }
 
     return (
-        <Grid
-            container
-            spacing={3}
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-            direction="column"
-            style={{ minHeight: "25vh" }}>
-            <Grid key={0} item>
-                <TextField
-                    value={roomName}
-                    error={roomNameError}
-                    onChange={onRoomNameChange}
-                    placeholder="Room name" />
-                <FormHelperText error={roomNameError}>Enter room name.</FormHelperText>
-            </Grid>
-            <Grid key={1} item>
-                <Grid
-                    container
-                    spacing={3}
-                    direction="row">
-                    <Grid key={0} item>
-                        <Button variant="contained" color="primary" size="large" onClick={onCancelClick}>
-                            Cancel
-                        </Button>
-                    </Grid>
-                    <Grid key={1} item>
-                        <Button variant="contained" color="primary" size="large" onClick={createClick}>
-                            Create
-                        </Button>
-                    </Grid>
+        <div className="center-page-view">
+            <Grid
+                container
+                spacing={3}
+                justify="center"
+                alignItems="center"
+                alignContent="center"
+                direction="column">
+                <Grid key={0} item>
+                    <TextField
+                        value={roomName}
+                        error={roomNameError}
+                        onChange={onRoomNameChange}
+                        placeholder="Room name" />
+                    <FormHelperText error={roomNameError}>Enter room name.</FormHelperText>
                 </Grid>
+                <Grid key={1} item>
+                    <Grid
+                        container
+                        spacing={3}
+                        direction="row">
+                        <Grid key={0} item>
+                            <Button variant="contained" color="primary" size="large" onClick={onCancelClick}>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid key={1} item>
+                            <Button variant="contained" color="primary" size="large" onClick={createClick}>
+                                Create
+                            </Button>
+                        </Grid>
+                    </Grid>
 
+                </Grid>
             </Grid>
-        </Grid>
+        </div>
     )
 }
 

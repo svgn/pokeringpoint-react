@@ -4,16 +4,6 @@ import { Redirect, useHistory } from 'react-router-dom';
 import ConnectionHub from "../rest/connectionHub";
 import {Button, Grid} from "@material-ui/core";
 
-const classes = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '40vh',
-    width: '50vh',
-}
-
 function Actions() {
     const history = useHistory();
     const user = localStorageService.getLoggedUser();
@@ -35,7 +25,7 @@ function Actions() {
         <>
             { user && <Redirect to={`/room/${user.lobbyId}`} /> }
 
-            <div style={classes}>
+            <div className="center-page-view">
                 <Grid
                     container
                     spacing={10}
