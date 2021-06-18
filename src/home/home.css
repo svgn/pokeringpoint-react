@@ -1,11 +1,19 @@
 @import './poker-table/poker-table.css';
 
+.home-main {
+    display: flex;
+    flex-direction: column;
+}
+
 .home__header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
+.home__table {
+    flex: 1;
+}
 
 .home__header-button {
     display: flex;
@@ -16,4 +24,11 @@
 
 .home__header-button div {
     font-size: 12px;
+}
+
+.home__voting-footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
 }
