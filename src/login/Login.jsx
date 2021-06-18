@@ -1,70 +1,116 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import { localStorageService } from '../storage/local-storage.service';
-import { Redirect } from 'react-router-dom';
-import JoinRoom from './JoinRoom';
-import CreateRoom from './CreateRoom';
-import Actions from './Actions';
-import HttpRequest from "../rest/httpRequest";
+import React, {useState, useEffect } from 'react';
+import { Grid, TextField, FormControl, InputLabel, Select, Button, FormControlLabel, Checkbox, FormHelperText } from '@material-ui/core';
+import HttpRequest from '../rest/httpRequest';
 import ConnectionHub from "../rest/connectionHub";
-
+import { useHistory } from "react-router-dom";
 
 function Login() {
-    const [isJoinRoomView, setJoinRoomView] = useState(false);
-    const [isCreateRoomView, setCreateRoomView] = useState(false);
+    const [roomId, setRoomId] = useState('');
+    const [roomError, setRoomError] = useState(false);
+    const [username, setUsername] = useState('');
+    const [usernameError, setUsernameError] = useState(false);
+    const [isObserver, setIsObserver] = useState();
+    const [rooms, setRooms] = useState([]);
     const history = useHistory();
-    const user = localStorageService.getLoggedUser();
 
-    const joinRoom = useCallback(async ({ username, isObserver, roomId }) => {
-        const room = await HttpRequest.getRoom({ id: roomId });
-        const userType = isObserver ? 0 : 1;
-        ConnectionHub.joinLobby(room.id, username, userType);
-      }, []);
+    const selectRoom = async () => {
+        if (roomId === '') {
+            setRoomError(true);
+        }
+        if (username === '') {
+            setUsernameError(true);
+        }
+        if (roomId && username) {
+            const room = await HttpRequest.getRoom({ id: roomId });
+            const userType = isObserver ? 0 : 1;
+            ConnectionHub.joinLobby(room.id, username, userType);
+        }
+    }
+    const cancelRoom = () => {
+        history.push(`/`);
+    }
+    const onRoomIdChange = (e) => {
+        if (roomError) {
+            setRoomError(false);
+        }
+        setRoomId(e.target.value);
+    }
+    const onUsernameChange = (e) => {
+        if (usernameError) {
+            setUsernameError(false);
+        }
+        setUsername(e.target.value)
+    }
+
+    const setRoom = async () => {
+        const response = await HttpRequest.getRooms();
+        response.unshift({ id: '', value: ''})
+        setRooms(response || []);
+    }
 
     useEffect(() => {
-        ConnectionHub.subscribeForJoinLobby((user) => {
-          localStorageService.setLoggedUser(user);
-          const { lobbyId } = user; 
-          history.push(`/room/${lobbyId}`);
-        });
-    }, [history]);
+        setRoom();
+    }, []);
 
-    const onCreateRoom = async (roomName) => {
-        const response = await HttpRequest.createRoom({ roomName });
-        const room = await response.json();
-        history.push(`/room/${room.id}`);
-        setJoinRoomView(true);
-        setCreateRoomView(false);
-    }
-
-    const onJoinRoomClick = ({ username, isObserver, roomId }) => {
-        joinRoom({ username, isObserver, roomId });
-    }
 
     return (
-        <>
-            { user && <Redirect to={`/room/${user.lobbyId}`} /> }
-
-            <div className="login-form">
-                <div>
-                    { !isJoinRoomView && !isCreateRoomView &&
-                        <Actions
-                            onCreateClick={() => setCreateRoomView(true)}
-                            onJoinClick={() => setJoinRoomView(true)}/>
-                    }
-                    {isJoinRoomView &&
-                        <JoinRoom
-                            onCancelClick={() => setJoinRoomView(false)}
-                            onJoinClick={onJoinRoomClick}/>
-                    }
-                    {isCreateRoomView &&
-                        <CreateRoom
-                            onCancelClick={() => setCreateRoomView(false)}
-                            onCreateClick={onCreateRoom}/>
-                    }
-                </div>
-            </div>
-       </>
+        <Grid
+            container
+            spacing={3}
+            justify="center"
+            lignItems="center"
+            alignContent="center"
+            direction="column"
+            style={{ minHeight: "25vh" }}>
+            <Grid key={0} item>
+                <FormControl size="medium" style={{ minWidth: 195 }}>
+                    <InputLabel value={roomId}>Room</InputLabel>
+                    <Select
+                        native
+                        error={roomError}
+                        autoWidth={false}
+                        value={roomId}
+                        onChange={onRoomIdChange}
+                    >
+                        {rooms.map(room => {
+                            return <option key={room.id} value={room.id}>{room.name}</option>
+                        })}
+                    </Select>
+                    <FormHelperText error={roomError}>Select room.</FormHelperText>
+                </FormControl>
+            </Grid>
+            <Grid key={1} item>
+                <TextField
+                    error={usernameError}
+                    value={username}
+                    onChange={onUsernameChange}
+                    placeholder="Username" />
+                <FormHelperText error={usernameError}>Enter username.</FormHelperText>
+            </Grid>
+            <Grid key={2} item>
+                <FormControlLabel
+                    control={<Checkbox checked={isObserver} color="primary" onChange={()=>setIsObserver(!isObserver)} />}
+                    label="Join as observer"
+                />
+            </Grid>
+            <Grid key={3} item>
+                <Grid
+                    container
+                    spacing={3}
+                    direction="row">
+                    <Grid key={0} item>
+                        <Button variant="contained" color="primary" size="large" onClick={cancelRoom}>
+                            Cancel
+                        </Button>
+                    </Grid>
+                    <Grid key={1} item>
+                        <Button variant="contained" color="primary" size="large" onClick={selectRoom}>
+                            Join
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     )
 }
 
