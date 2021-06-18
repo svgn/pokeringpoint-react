@@ -49,7 +49,7 @@ function reducer(state = {}, action = {}) {
     }
 }
 
-export function Home() {
+function Home() {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [user, setUser] = useState(localStorageService.getLoggedUser());
     const params = useParams();
@@ -156,3 +156,5 @@ export function Home() {
         </>
     );
 }
+
+export default Home;

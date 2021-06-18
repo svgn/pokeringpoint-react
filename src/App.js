@@ -5,15 +5,15 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Actions from "./actions/Actions";
-import { Home } from "./home/Home.jsx";
 import { ThemeProvider } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { localStorageService } from "./storage/local-storage.service";
 import blue from "@material-ui/core/colors/blue";
+import Actions from "./actions/Actions";
 import ConnectionHub from './rest/connectionHub.js';
 import Login from "./login/Login";
 import Create from "./create/Create";
+import Home from "./home/Home.jsx";
 
 const theme = createMuiTheme({
   palette: {
