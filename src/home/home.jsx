@@ -114,7 +114,7 @@ export function Home() {
     }
 
     const showVotes = state.showVotes || state.userList.reduce((acc,user) => (acc && user.vote), true);
-    const currentUser = state.userList.find(player => player.connectionId === user.connectionId) || {};
+    const currentUser = state.userList.find(player => player?.connectionId === user?.connectionId) || {};
 
     return (
         <>
