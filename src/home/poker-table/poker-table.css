@@ -18,14 +18,12 @@
         "bl    bottom  br";
 }
 
-
 .table-top,
 .table-bottom {
     display: flex;
     flex-direction: row;
     justify-content: center;
     justify-content: center;
-    border: 1px solid aquamarine;
 }
 
 .table-left,
@@ -33,7 +31,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid aquamarine;
 }
 
 .table-top {
@@ -68,6 +65,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.table-middle__mode-wrapper {
+    display: flex;
+}
+
+.mode__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.mode__value {
+
+}
+
+.mode__count {
+
 }
 
 @media only screen and (max-width: 600px) {

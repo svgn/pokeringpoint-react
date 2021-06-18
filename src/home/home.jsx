@@ -8,6 +8,7 @@ import ConnectionHub from '../rest/connectionHub.js';
 import Cards from "./cards/Cards";
 import PokerTable from './poker-table/PokerTable';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import { getTheModes } from '../utils/statisticsUtils'
 
 const initialState = {
     name: 'No name',
@@ -16,15 +17,10 @@ const initialState = {
     cards: []
 };
 
-// const initialState = {
-//     showVotesActive: false,
-//     userList: [
-//         { id: 1, name: 'person1', vote: 7 },
-//         { id: 2, name: 'koev', vote: 2 },
-//         { id: 3, name: 'person3', vote: 5 },
-//         { id: 4, name: 'person4', vote: 1 },
-//     ]
-// };
+const calculateModes = (state) => {
+    const votes = state.userList?.map(user => user.vote);
+    return getTheModes(votes);
+}
 
 function reducer(state = {}, action = {}) {
     switch (action.type) {
@@ -53,6 +49,7 @@ export function Home() {
     const [user, setUser] = useState(localStorageService.getLoggedUser());
     const params = useParams();
     const roomId = parseInt(params.roomId);
+    let modes = calculateModes(state);
 
     useEffect(() => {
         ConnectionHub.subscribeForUpdateLobby(roomId, (lobby) => {
@@ -75,9 +72,12 @@ export function Home() {
         });
     }, [roomId, user]);
 
+    
+
     const onShowVotesClick = async (event) => {
         event.preventDefault();
         await ConnectionHub.showVote(roomId);
+
     }
 
     const onClearVotesClick = async (event) => {
@@ -121,6 +121,7 @@ export function Home() {
                             user={user}
                             onShowVotesClick={onShowVotesClick}
                             onClearVotesClick={onClearVotesClick}
+                            modes={modes}
                         />
                     }
                     {user.userType === 1 &&

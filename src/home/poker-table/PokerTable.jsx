@@ -1,7 +1,7 @@
 import React from 'react';
 import PokerPlayer from './player/PokerPlayer';
 
-function PokerTable({ players, showVotes, user, onShowVotesClick, onClearVotesClick }) {
+function PokerTable({ players, showVotes, user, modes, onShowVotesClick, onClearVotesClick }) {
     const createPlayerDistribution = () => {
         let distribution = {
             top: [],
@@ -35,6 +35,16 @@ function PokerTable({ players, showVotes, user, onShowVotesClick, onClearVotesCl
                     <div className="table-middle__core">
                         <button onClick={onClearVotesClick}>Clear Votes</button>
                         <button onClick={onShowVotesClick}>Show Votes</button>
+                        <div>Popular votes: </div>
+                        <div className="table-middle__mode-wrapper">
+                            { modes.map((item) => {
+                                return (<div key="vote" class="mode__container">
+                                    <div class="mode__value">{item[0]}</div>
+                                    <div class="mode__count">{item[1]} Votes</div>
+                                </div>)
+                             })
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="table-top">{ d.top.map(p => (<PokerPlayer key={p.connectionId} player={p} showVote={true}></PokerPlayer>)) }</div>
