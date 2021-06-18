@@ -8,15 +8,11 @@ function Actions() {
     const history = useHistory();
     const user = localStorageService.getLoggedUser();
     useEffect(() => {
-        let wasCanceled = false;
         ConnectionHub.subscribeForJoinLobby((user) => {
-            if (!wasCanceled) {
-                localStorageService.setLoggedUser(user);
-                const { lobbyId } = user;
-                history.push(`/room/${lobbyId}`);
-            }
+          localStorageService.setLoggedUser(user);
+          const { lobbyId } = user;
+          history.push(`/room/${lobbyId}`);
         });
-        return () => { wasCanceled = true; };
     }, [history]);
     const redirectToCreatePare = () => {
         history.push("/create");
