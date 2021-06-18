@@ -17,6 +17,10 @@
     font-size: 40px;
     text-align: center;
     color: white;
+    background-color: rgb(185, 185, 185);
+}
+
+.poker-player__avatar--voted {
     background: linear-gradient(
         45deg
         ,#568BAF 12%,transparent 0,transparent 88%,#568BAF 0),linear-gradient(
@@ -27,7 +31,7 @@
     background-size: 17px 17px;
 }
 
-.poker-player__avatar--voted {
+.poker-player__avatar--vote-visible {
     background: none;
     border: 2px solid #568EB6;
     color: #568EB6;

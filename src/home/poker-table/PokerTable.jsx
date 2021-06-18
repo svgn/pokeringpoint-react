@@ -68,7 +68,7 @@ function PokerTable({ players, showVotes, user, modes, suggestedMode, onShowVote
                             }
                         </div>
                         {showVotes && (
-                            <div>
+                            <div className="table-middle__suggested-vote">
                                 <div>Suggested vote:</div>
                                 <div key="vote" className="mode__container">
                                     <div className="mode__value">{suggestedMode}</div>

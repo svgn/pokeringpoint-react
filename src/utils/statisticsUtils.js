@@ -25,6 +25,7 @@ export const getTheModes = (votes) => {
 }
 
 export const getSuggestedMode = (votes) => {
+    votes = votes?.filter(vote => vote !== null);
     if (votes.length === 0) {
         return 0;
     }
