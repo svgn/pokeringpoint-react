@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import HttpRequest from '../rest/httpRequest';
 import ConnectionHub from '../rest/connectionHub.js';
 import Cards from "./cards/Cards";
-import Gamblers from './gamblers/Gamblers';
 import PokerTable from './poker-table/PokerTable';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 

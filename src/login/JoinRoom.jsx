@@ -39,7 +39,7 @@ function JoinRoom({ onJoinClick, onCancelClick }) {
         setUsername(e.target.value)
     }
 
-    useEffect(async () => {
+    const setRoom = async () => {
         const response = await HttpRequest.getRooms();
         response.unshift({ id: '', value: ''})
         setRooms(response || []);
@@ -51,7 +51,10 @@ function JoinRoom({ onJoinClick, onCancelClick }) {
                 setRoomId(room.id);
             }
         }
+    }
 
+    useEffect(() => {
+       setRoom();
     }, []);
 
     return (

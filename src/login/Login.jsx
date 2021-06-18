@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Paper } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { localStorageService } from '../storage/local-storage.service';
 import { Redirect } from 'react-router-dom';
