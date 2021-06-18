@@ -1,7 +1,7 @@
 import React from 'react';
 import PokerPlayer from './player/PokerPlayer';
 
-function PokerTable({ players, showVotes, user }) {
+function PokerTable({ players, showVotes, user, onShowVotesClick, onClearVotesClick }) {
     const createPlayerDistribution = () => {
         let distribution = {
             top: [],
@@ -24,13 +24,18 @@ function PokerTable({ players, showVotes, user }) {
         return distribution;
     }
 
+    //TODO: always show vote only for our user
+
     const d = createPlayerDistribution(players);
 
     return (
         <div className="table-wrapper">
             <div className="table-container">
                 <div className="table-middle">
-                    <div className="table-middle__core"></div>
+                    <div className="table-middle__core">
+                        <button onClick={onClearVotesClick}>Clear Votes</button>
+                        <button onClick={onShowVotesClick}>Show Votes</button>
+                    </div>
                 </div>
                 <div className="table-top">{ d.top.map(p => (<PokerPlayer key={p.connectionId} player={p} showVote={true}></PokerPlayer>)) }</div>
                 <div className="table-right">{ d.right.map(p => (<PokerPlayer key={p.connectionId} player={p} showVote={true}></PokerPlayer>)) }</div>

@@ -8,8 +8,10 @@ import ConnectionHub from '../rest/connectionHub.js';
 import Cards from "./cards/Cards";
 import Gamblers from './gamblers/Gamblers';
 import PokerTable from './poker-table/PokerTable';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 const initialState = {
+    name: 'No name',
     showVotes: false,
     userList: [],
     cards: []
@@ -105,13 +107,31 @@ export function Home() {
         <>
             { !user ? <Redirect to='/login' /> :
                 <div className="home-main">
-                    <h2>{user.name}</h2>
-                    <button onClick={onClearVotesClick}>Clear Votes</button>
-                    <button onClick={onShowVotesClick}>Show Votes</button>
-                    <button onClick={onLeaveRoomClick}>Leave Room</button>
+                    <header className="home__header">
+                        <h2>{state.name}</h2>
+                        <div className="home__header-button" onClick={onLeaveRoomClick}>
+                            <MeetingRoomIcon fontSize="large"></MeetingRoomIcon>
+                            <div>Leave Room</div>
+                        </div>
+                    </header>
                     <hr/>
-                    {state.userList && <PokerTable players={state.userList} showVotes={showVotes} user={user} />}
-                    {user.userType === 1 && <Cards items={state.cards} onSelection={onVoteClick} selectedCard={user.vote} disable={state.showVotes} /> }
+                    {state.userList &&
+                        <PokerTable
+                            players={state.userList}
+                            showVotes={showVotes}
+                            user={user}
+                            onShowVotesClick={onShowVotesClick}
+                            onClearVotesClick={onClearVotesClick}
+                        />
+                    }
+                    {user.userType === 1 &&
+                        <Cards
+                            items={state.cards}
+                            onSelection={onVoteClick}
+                            selectedCard={user.vote}
+                            disable={state.showVotes}
+                        />
+                    }
                 </div>
             }
         </>
