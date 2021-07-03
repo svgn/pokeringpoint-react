@@ -144,7 +144,7 @@ function Home() {
                     {user.userType === 1 &&
                         <div className="home__voting-footer">
                             <Cards
-                                items={state.cards}
+                                cards={state.cards}
                                 onSelection={onVoteClick}
                                 selectedCard={currentUser.vote}
                                 disable={state.showVotes}

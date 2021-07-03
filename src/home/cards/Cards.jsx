@@ -1,6 +1,19 @@
 import React from 'react';
 import { Grid, Paper, makeStyles, Typography } from '@material-ui/core';
 import blue from "@material-ui/core/colors/blue";
+import One from '../../assets/cards/1.png';
+import Two from '../../assets/cards/2.png';
+import Three from '../../assets/cards/3.png';
+import Five from '../../assets/cards/5.png';
+import Eight from '../../assets/cards/8.png';
+import Thirteen from '../../assets/cards/13.png';
+import Twenty from '../../assets/cards/20.png';
+import Fourty from '../../assets/cards/40.png';
+import Hundred from '../../assets/cards/100.png';
+import Break from '../../assets/cards/break.png';
+import Cake from '../../assets/cards/cake.png';
+import Dragon from '../../assets/cards/dragon.png';
+import Split from '../../assets/cards/split.png';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -27,13 +40,33 @@ const useStyles = makeStyles(() => ({
             marginTop: '-.25rem'
         }
     },
+    cardImage: {
+        width: '100%',
+        height: '100%'
+    },
     selectedCard: {
         backgroundColor: blue[300],
         marginTop: '-.25rem'
     }
 }));
 
-function Cards({ items, onSelection, selectedCard }) {
+const cardImageValueMap = {
+    1: One,
+    2: Two,
+    3: Three,
+    5: Five,
+    8: Eight,
+    13: Thirteen,
+    20: Twenty,
+    40: Fourty,
+    100: Hundred,
+    'cake': Cake,
+    'split': Split,
+    'dragon': Dragon,
+    'break': Break,
+};
+
+function Cards({ cards, onSelection, selectedCard }) {
     const classes = useStyles();
     const onSelect = (card) => {
         onSelection(card);
@@ -48,15 +81,18 @@ function Cards({ items, onSelection, selectedCard }) {
             justify="center"
             alignItems="center"
             alignContent="center">
-            {items.map((card) => {
+            {cards.map((card) => {
                 const selectedClass = selectedCard === card ? classes.selectedCard : '';
                 return (
                     <Grid key={card} item onClick={() => onSelect(card)}>
                         <Paper
                             className={`${classes.paper} ${selectedClass}`}>
-                            <Typography variant="h5" component="h3">
-                                {card}
-                            </Typography>
+                            { cardImageValueMap[card] ? 
+                                (<img className={classes.cardImage} src={cardImageValueMap[card]} alt={card} />) :
+                                (<Typography variant="h5" component="h3">
+                                    {card}
+                                </Typography>)
+                            }
                         </Paper>
                     </Grid>
                 );
